@@ -2,6 +2,27 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
     "flowbite": "^4.0.1",
+    "nodemon": "^3.1.11",
     "tailwindcss": "^4.1.18"
-  }
+  },
+  "name": "todo-app-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon script.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SimonTheDevloper/mini-todoapp-Frontend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SimonTheDevloper/mini-todoapp-Frontend/issues"
+  },
+  "homepage": "https://github.com/SimonTheDevloper/mini-todoapp-Frontend#readme"
 }
