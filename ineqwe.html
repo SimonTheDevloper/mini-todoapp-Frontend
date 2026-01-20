@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="de" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowbite v4.0 Card</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        // Diese Definitionen fehlen deinem Code, deshalb sieht er "falsch" aus
+                        'neutral-primary-soft': '#f9fafb', // Light Mode
+                        'text-heading': '#111827',
+                        'text-body': '#6b7280',
+                        'border-default': '#e5e7eb',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            .dark {
+                --tw-bg-neutral-primary-soft: #1f2937; /* Dunkles Grau für Dark Mode */
+                --tw-text-heading: #ffffff;
+                --tw-text-body: #9ca3af;
+                --tw-border-default: #374151;
+            }
+        }
+        /* Mapping der Klassen auf die Variablen */
+        .bg-neutral-primary-soft { background-color: var(--tw-bg-neutral-primary-soft, #f9fafb); }
+        .text-heading { color: var(--tw-text-heading, #111827); }
+        .text-body { color: var(--tw-text-body, #6b7280); }
+        .border-border-default { border-color: var(--tw-border-default, #e5e7eb); }
+    </style>
+</head>
+
+<body class="p-8 bg-white dark:bg-gray-900">
+
+    <a href="#"
+        class="bg-neutral-primary-soft block max-w-sm p-6 border border-border-default rounded-lg shadow-sm hover:bg-gray-100 dark:hover:bg-gray-800">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-heading">Noteworthy technology acquisitions 2021</h5>
+        <p class="font-normal text-body">Here are the biggest technology acquisitions of 2025 so far, in reverse
+            chronological order.</p>
+    </a>
+
+</body>
+
+</html>
