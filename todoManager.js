@@ -38,3 +38,27 @@ function handleTodoClick(id) {
 
 handleTodoClick('696cf50bb7222e1da92147b6');
 
+const taskInput = document.getElementById('taskInput');
+const addTaskBtn = document.getElementById('addTask')
+taskInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        addNewTask();
+    }
+});
+addTaskBtn.addEventListener('click', () => addNewTask())
+
+function addNewTask() {
+    const task = taskInput.value.trim();
+    if (task.length === 0) {
+        return;
+    }
+    const newTaskObj = {
+        _id: Math.random().toString(36),
+        text: task,
+        completed: false,
+        tags: [],
+        priority: "Low",
+        date: new Date().toISOString() // macht das zu dem richtigen string den man auch in mongoDB hat
+    }
+    console.log(newTaskObj)
+}
