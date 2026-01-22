@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn/SignUp</title>
+</head>
+
+<body>
+    <main>
+        <form id="logInForm">
+            <h1>Log in</h1>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="password" required>
+            <button type="submit">Submit</button>
+            <p id="switchToSignUp">New here? First SignUp</p>
+        </form>
+        <form id="signUpForm" style="display: none;">
+            <h1>Create new accout</h1>
+            <input type="text" name="username" placeholder="username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="password" required>
+            <button type="submit">Submit</button>
+            <p id="switchToLogIn">Already signUp Login</p>
+        </form>
+    </main>
+    <script type="module" src="/js/login/login.js"></script>
+</body>
+
+</html>
