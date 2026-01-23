@@ -1,3 +1,5 @@
+import { createNewUser } from "./loginServices.js";
+
 const signUpForm = document.getElementById('signUpForm');
 const logInForm = document.getElementById('logInForm');
 const switchToSignUp = document.getElementById('switchToSignUp');
@@ -29,6 +31,7 @@ signUpForm.addEventListener('submit', (e) => {
         password: formData.get('password')
     }
     console.log(newUser);
+    createNewUser(newUser)
     signUpForm.reset();
 })
 
