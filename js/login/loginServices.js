@@ -11,9 +11,16 @@ export async function createNewUser(newUser) {
             credentials: 'include',
         })
         const data = await response.json();
-        console.log(data)
+        console.log(data);
+        if (!response.ok) {
+            throw new Error(data.message || data.error || 'Registration failed')
+        }
+        setTimeout(() => {
+            window.location.href = "index.html"
+        })
     } catch (err) {
         console.error(err)
+        throw new Error(err.message || 'Failed to create user ')
     }
 }
 export async function loginUser(user) {
@@ -29,11 +36,13 @@ export async function loginUser(user) {
         const data = await response.json();
         console.log(data);
         if (!response.ok) {
-            throw new Error(data.message || "Registration failed");
+            throw new Error(data.message || data.error || "Login failed");
         }
-        return data
+        setTimeout(() => {
+            window.location.href = "index.html"
+        })
     } catch (err) {
         console.error('created user error:', err);
-        throw new Error(err.message || 'Failed to create user')
+        throw new Error(err.message || 'Failed to login user')
     }
 }

@@ -33,15 +33,16 @@ async function handleLogin(e) {
   }
   updateMsg(loginMsg, 'login to account...', 'black');
   try {
-
+    await loginUser(user);
+    updateMsg(loginMsg, 'Succesfully logged in', 'green')
+    signUpForm.reset();
   } catch (err) {
-
+    updateMsg(loginMsg, err.message || 'Error', 'red')
   }
   console.log(user);
-  loginUser(user)
+
   logInForm.reset();
 };
-
 
 signUpForm.addEventListener('submit', handleSignUp)
 
