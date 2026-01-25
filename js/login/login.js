@@ -21,7 +21,6 @@ switchToLogIn.addEventListener('click', () => {
 
 });
 
-
 logInForm.addEventListener('submit', handleLogin);
 
 async function handleLogin(e) {
@@ -64,7 +63,6 @@ async function handleSignUp(e) {
     signUpForm.reset();
   } catch (err) {
     updateMsg(signUpMsg, err.message || 'Error', 'red');
-
   }
 };
 

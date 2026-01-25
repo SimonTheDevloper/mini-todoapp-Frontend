@@ -1,13 +1,12 @@
-import { getCompletedTodos, getOpenTodos } from "./todoService.js";
+import { fetchAllTodos, getCompletedTodos, getOpenTodos, localTodos } from "./todoService.js";
 import { data } from "../data/testDaten.js";
 import { renderTodoList } from "./todoUI.js";
 
+fetchAllTodos();
 function renderAllTodos() {
     renderTodoList(getOpenTodos(), 'openTask', handleTodoClick);
     renderTodoList(getCompletedTodos(), 'completedList', handleTodoClick);
 }
-
-
 renderAllTodos()
 
 
