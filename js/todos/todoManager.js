@@ -2,12 +2,16 @@ import { fetchAllTodos, getCompletedTodos, getOpenTodos, localTodos } from "./to
 import { data } from "../data/testDaten.js";
 import { renderTodoList } from "./todoUI.js";
 
-fetchAllTodos();
+function init() {
+    fetchAllTodos();
+    renderAllTodos()
+}
+
 function renderAllTodos() {
     renderTodoList(getOpenTodos(), 'openTask', handleTodoClick);
     renderTodoList(getCompletedTodos(), 'completedList', handleTodoClick);
 }
-renderAllTodos()
+
 
 
 export function handleTodoClick(id) {
@@ -48,3 +52,4 @@ function addNewTask() {
     renderAllTodos();
     taskInput.value = "";
 }
+init();

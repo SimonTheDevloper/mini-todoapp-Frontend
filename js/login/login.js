@@ -70,3 +70,4 @@ function updateMsg(elemt, text, color) {
   elemt.textContent = text;
   elemt.style.color = color;
 };
+

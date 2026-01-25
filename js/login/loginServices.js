@@ -4,11 +4,12 @@ export async function createNewUser(newUser) {
     try {
         const response = await fetch(`${url}/register`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(newUser),
-            credentials: 'include',
+
         })
         const data = await response.json();
         console.log(data);
@@ -27,11 +28,12 @@ export async function loginUser(user) {
     try {
         const response = await fetch(`${url}/login`, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(user),
-            credentials: 'include',
+
         })
         const data = await response.json();
         console.log(data);

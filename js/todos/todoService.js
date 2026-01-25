@@ -82,11 +82,11 @@ export async function fetchAllTodos() {
             throw new Error('Failed to load todos');
         }
         const todos = await response.json() // man muss wait machen, das es sozusagen 'ausspackt'
+        console.log(todos)
         return todos
     } catch (error) {
         throw new Error(error.message || 'Failed to fetch data');
     }
 }
-
 async function refreshToken() {
-} 
+}
