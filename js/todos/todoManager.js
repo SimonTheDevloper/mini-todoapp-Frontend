@@ -2,8 +2,8 @@ import { fetchAllTodos, getCompletedTodos, getOpenTodos, localTodos } from "./to
 import { data } from "../data/testDaten.js";
 import { renderTodoList } from "./todoUI.js";
 
-function init() {
-    fetchAllTodos();
+async function init() {
+    await fetchAllTodos();
     renderAllTodos()
 }
 
