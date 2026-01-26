@@ -1,3 +1,5 @@
+import { refreshToken } from "../authHelper.js"
+
 const url = 'http://localhost:3000/todos'
 export const localTodos = [
 ]
@@ -12,19 +14,24 @@ export function getCompletedTodos() {
 
 export async function fetchAllTodos() {
     try {
-        const response = await fetch(url, {
+        let response = await fetch(url, {
             method: 'GET',
             credentials: 'include'
         });
 
+
+        if (response.status === 401) {
+            console.log('accestoken abgelaufen. Veruchen das accestoken zu refreshen...')
+            const refreshSucces = await refreshToken();
+            if (refreshSucces) {
+                response = await fetch(url, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+            }
+        }
         if (!response.ok) {
-            if (response.status === 401) {
-                await refreshToken()
-            }
-            else {
-                throw new Error(data.message || data.error || 'Failed to fetch todos');
-            }
-            throw new Error('Failed to load todos');
+            throw new Error(data.message || data.error || `Fehler: ${response.status}`);
         }
         const data = await response.json() // man muss wait machen, das es sozusagen 'ausspackt'
 
@@ -33,8 +40,6 @@ export async function fetchAllTodos() {
         console.log(localTodos)
         //return data
     } catch (error) {
-        throw new Error(error.message || 'Failed to fetch data');
+        throw new Error(error.message || 'Fehler in FetchTodos'); // immer mit || da es irgendwie sein kann das ich error msg vergessen hat aber man trotzdem einen error bekommt
     }
 }
-async function refreshToken() {
-};
