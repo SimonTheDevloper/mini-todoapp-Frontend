@@ -1,4 +1,4 @@
-import { fetchAllTodos, getCompletedTodos, getOpenTodos, localTodos, postTodo, updateLocalTodos } from "./todoService.js";
+import { fetchAllTodos, getCompletedTodos, getOpenTodos, localTodos, patchTodo, postTodo, updateLocalTodos } from "./todoService.js";
 import { renderTodoList } from "./todoUI.js";
 
 async function init() {
@@ -13,13 +13,21 @@ function renderAllTodos() {
 
 
 
-export function handleTodoClick(id) {
+export async function handleTodoClick(id) {
     console.log("CLICK ERKANNT! ID:", id);
     const todo = localTodos.find(todo => todo._id === id);
-
-    todo.completed = !todo.completed;
+    const completed = !todo.completed
+    console.log(completed)
+    todo.completed = completed;
     console.log("Rendere Listen...");
     renderAllTodos()
+
+    try {
+        const synTodo = await patchTodo(id, completed);
+        console.log(synTodo)
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 //handleTodoClick('696cf50bb7222e1da92147b6');
@@ -48,6 +56,7 @@ async function addNewTask() {
     localTodos.unshift(newTaskObj); // unshift, da es am anfang des array kommen soll
     renderAllTodos();
     taskInput.value = "";
+
     try {
         const serverTodo = await postTodo(task);
         console.log(serverTodo);

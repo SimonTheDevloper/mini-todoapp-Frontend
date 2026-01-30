@@ -76,3 +76,35 @@ export async function postTodo(newTodo) {
         throw new Error("Create Todo Failed", error)
     }
 }
+export async function patchTodo(id, completed) {
+    try {
+        let response = await fetch(`${url}/${id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ completed: completed })
+        });
+
+        if (response.status === 401) {
+            console.log('accestoken abgelaufen. Veruchen das accestoken zu refreshen...')
+            const refreshSucces = await refreshToken();
+            if (refreshSucces) {
+                response = await fetch(`${url}/${id}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'include',
+                    body: JSON.stringify({ completed: completed })
+                });
+            }
+        }
+        if (!response.ok) {
+            throw new Error(data.message || data.error || `Fehler: ${response.status}`)
+        }
+        const data = await response.json()
+        return data
+    } catch (error) {
+        throw new Error("Patch Todo Failed", error);
+
+    }
+
+}
