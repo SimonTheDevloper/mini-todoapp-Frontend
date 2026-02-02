@@ -106,5 +106,4 @@ export async function patchTodo(id, completed) {
         throw new Error("Patch Todo Failed", error);
 
     }
-
 }

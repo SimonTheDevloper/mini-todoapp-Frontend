@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/SimonTheDevloper/mini-todoapp-Frontend/issues"
   },
-  "homepage": "https://github.com/SimonTheDevloper/mini-todoapp-Frontend#readme"
+  "homepage": "https://github.com/SimonTheDevloper/mini-todoapp-Frontend#readme",
+  "devDependencies": {
+    "daisyui": "^5.5.14"
+  }
 }

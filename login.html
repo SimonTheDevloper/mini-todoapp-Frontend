@@ -5,26 +5,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LogIn/SignUp</title>
+    <link rel="stylesheet" href="./dist/output.css">
 </head>
 
-<body>
+<body class="flex min-h-screen items-center justify-center bg-base-100">
     <main>
-        <form id="logInForm">
-            <h1>Log in</h1>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="password" required>
-            <button type="submit">Submit</button>
-            <p id="loginMsg"></p>
-            <p id="switchToSignUp">New here? First SignUp</p>
+        <form id="logInForm" data-theme="light"
+            class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+            <legend class="fieldset-legend text-xl font-bold">Login</legend>
+
+            <label class="label">Email</label>
+            <input type="email" class="input w-full" name="email" placeholder="Email" required>
+            
+            <label class="label">Password</label>
+            <input type="password" class="input w-full" placeholder="Password" required>
+            
+            <button type="submit" class="btn btn-neutral mt-4 w-full">Login</button>
+            <p id="loginMsg" class="mt-2 text-sm"></p>
+            <p id="switchToSignUp" class="link link-primary mt-2 text-center text-sm cursor-pointer">New here? First SignUp</p>
         </form>
-        <form id="signUpForm" style="display: none;">
-            <h1>Create new accout</h1>
-            <input type="text" name="username" placeholder="username" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="password" required>
-            <button type="submit">Submit</button>
-            <p id="signUpMsg"></p>
-            <p id="switchToLogIn">Already signUp Login</p>
+
+        <form id="signUpForm" data-theme="light"
+            class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4" style="display: none;">
+
+            <legend class="fieldset-legend text-xl font-bold">Create new account</legend>
+            
+            <label class="label">Username</label>
+            <input type="text" name="username" class="input w-full" placeholder="Username" required>
+            
+            <label class="label">Email</label>
+            <input type="email" name="email" class="input w-full" placeholder="Email" required>
+            
+            <label class="label">Password</label>
+            <input type="password" name="password" class="input w-full" placeholder="Password" required>
+            
+            <button type="submit" class="btn btn-neutral mt-4 w-full">Submit</button>
+            <p id="signUpMsg" class="mt-2 text-sm"></p>
+            <p id="switchToLogIn" class="link link-primary mt-2 text-center text-sm cursor-pointer">Already signed up? Login</p>
         </form>
     </main>
     <script type="module" src="/js/login/login.js"></script>
