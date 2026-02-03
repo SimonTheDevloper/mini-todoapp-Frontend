@@ -4,32 +4,62 @@
 <head>
     <meta charset="UTF-8" />
     <title>Todo App</title>
-
-    <!-- Tailwind + DaisyUI -->
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="dist/output.css">
 </head>
 
-<body>
-
-    <main>
-
-        <h1> Todo App</h1>
-
-        <div>
-
-            <input type="text" id="taskInput" placeholder="Add task">
-            <button id="addTask">+ Hinzufügen</button>
-
+<body class="bg-base-100" data-theme="light">
+<header class="bg-gray-100">
+    <legend class=" px-10 p-4 fieldset-legend text-2xl font-bold text-center ">Todo App</legend>
+</header>
+        <main class="min-h-screen flex items-start justify-center pt-8 px-4">
+        <div class="w-full max-w-2xl space-y-6">
+            <div class="bg-base-200 border-2 border-base-300 rounded-box  p-6">
+                <label class="label">
+                    <span class="label-text font-semibold text-lg">New Todo</span>
+                </label>
+                <div class="flex gap-2 flex-col sm:flex-row">
+                    <input type="text" id="taskInput" class="input input-bordered w-full bg-base-100 focus:outline-none focus:ring-2 focus:ring-gray-400" placeholder="What needs to be done?">
+                    <button class="btn btn-neutral hover:btn-primary transition-all duration-200" id="addTask">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                        </svg>
+                        Add
+                    </button>
+                </div>
+            </div>
+            
+            <div class="bg-base-200 border-2 border-base-300 rounded-box  p-6">
+                <div class="divider my-2"></div>
+                <h2 class="text-sm font-bold uppercase tracking-wider text-gray-600 mb-3 flex items-center gap-2">
+                    <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
+                    Open Todos
+                </h2>
+                <div id="openTask" class="flex flex-col gap-2 min-h-[50px]">
+                    <div class="text-center py-8 text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                        </svg>
+                        <p class="text-sm">No tasks yet. Add one above!</p>
+                    </div>
+                </div>
+                <h2 class="text-sm font-bold uppercase tracking-wider text-gray-600 mt-6 mb-3 flex items-center gap-2">
+                    <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                    Completed
+                </h2>
+                <div id="completedList" class="flex flex-col gap-2 min-h-[50px]">
+                    <div class="text-center py-8 text-gray-400 opacity-60">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p class="text-sm">Nothing completed yet</p>
+                    </div>
+                </div>
+            </div>
+            
         </div>
-        <h1>Offene Todos</h1>
-        <div id="openTask">
-        </div>
-        <h1>Abgeschlossene Todos</h1>
-        <div id="completedList">
-        </div>
-
-
     </main>
+
     <script type="module" src="js/todos/todoManager.js"></script>
 </body>
 
