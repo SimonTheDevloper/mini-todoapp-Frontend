@@ -1,14 +1,13 @@
 {
-    "buildCommand": "npm run build",
-    "outputDirectory": "dist",
-    "rewrites": [
-        {
-            "source": "/(.*)",
-            "destination": "/dashboard.html"
-        },
-        {
-            "source": "/auth",
-            "destination": "/login.html"
-        }
-    ]
+  "buildCommand": "npm run build",
+  "rewrites": [
+    {
+      "source": "/auth",
+      "destination": "/login.html"
+    },
+    {
+      "source": "/",
+      "destination": "/dashboard.html"
+    }
+  ]
 }
