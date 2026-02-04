@@ -10,6 +10,7 @@
   "description": "",
   "main": "script.js",
   "scripts": {
+    "build" : "npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon script.js"
   },
