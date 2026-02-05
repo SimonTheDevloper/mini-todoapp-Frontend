@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000/user'
+const url = '/api/user'
 export async function refreshToken() {
     try {
         const response = await fetch(`${url}/refresh`, {
