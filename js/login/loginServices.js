@@ -17,7 +17,7 @@ export async function createNewUser(newUser) {
             throw new Error(data.message || data.error || 'Registration failed')
         }
         setTimeout(() => {
-            window.location.href = "index.html"
+            window.location.href = "dashboard.html"
         }, 1000);
     } catch (err) {
         console.error(err)
