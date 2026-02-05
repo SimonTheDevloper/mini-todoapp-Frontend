@@ -2,6 +2,10 @@
   "buildCommand": "npm run build",
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "https://todoapp-api-1p6m.onrender.com/:path*"
+    },
+    {
       "source": "/auth",
       "destination": "/login.html"
     },

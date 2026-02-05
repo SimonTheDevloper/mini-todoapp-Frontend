@@ -1,4 +1,4 @@
-const url = "http://localhost:3000/user"
+const url = "/api/user"
 
 export async function createNewUser(newUser) {
     try {
@@ -41,7 +41,7 @@ export async function loginUser(user) {
             throw new Error(data.message || data.error || "Login failed");
         }
         setTimeout(() => {
-            window.location.href = "index.html"
+            window.location.href = "dashboard.html"
         }, 2000);
     } catch (err) {
         console.error('created user error:', err);

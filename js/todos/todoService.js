@@ -1,6 +1,6 @@
 import { refreshToken } from "../authHelper.js"
 
-const url = 'http://localhost:3000/todos'
+const url = '"/api/user/todos'
 export let localTodos = [
 ]
 export function updateLocalTodos(newArray) {
