@@ -16,7 +16,7 @@ export function getCompletedTodos() {
 
 export async function fetchAllTodos() {
     try {
-        let response = await fetch(url, {
+        let response = await fetch(`${url}`, {
             method: 'GET',
             credentials: 'include'
         });
@@ -26,7 +26,7 @@ export async function fetchAllTodos() {
             console.log('accestoken abgelaufen. Veruchen das accestoken zu refreshen...')
             const refreshSucces = await refreshToken();
             if (refreshSucces) {
-                response = await fetch(url, {
+                response = await fetch(`${url}`, {
                     method: 'GET',
                     credentials: 'include'
                 });
@@ -47,7 +47,7 @@ export async function fetchAllTodos() {
 }
 export async function postTodo(newTodo) {
     try {
-        let response = await fetch(url, {
+        let response = await fetch(`${url}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
@@ -58,7 +58,7 @@ export async function postTodo(newTodo) {
             console.log('accestoken abgelaufen. Veruchen das accestoken zu refreshen...')
             const refreshSucces = await refreshToken();
             if (refreshSucces) {
-                response = await fetch(url, {
+                response = await fetch(`${url}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
