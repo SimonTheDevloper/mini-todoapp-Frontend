@@ -1,5 +1,6 @@
 import { createNewUser, loginUser } from "./loginServices.js";
 
+
 const signUpForm = document.getElementById("signUpForm");
 const logInForm = document.getElementById("logInForm");
 

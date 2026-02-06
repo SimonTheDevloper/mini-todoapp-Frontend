@@ -1,4 +1,6 @@
-const url = "/api/user"
+import { apiBase } from "../config.js/api.js";
+
+const url = `${apiBase}/user`
 
 export async function createNewUser(newUser) {
     try {

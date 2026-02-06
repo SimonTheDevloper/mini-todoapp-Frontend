@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://todoapp-api-1p6m.onrender.com/:path*"
+      "destination": "https://todoapp--.onrender.com/:path*"
     },
     {
       "source": "/auth",

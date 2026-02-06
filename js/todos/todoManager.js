@@ -14,12 +14,12 @@ function renderAllTodos() {
 
 
 export async function handleTodoClick(id) {
-    console.log("CLICK ERKANNT! ID:", id);
+    //console.log("CLICK ERKANNT! ID:", id);
     const todo = localTodos.find(todo => todo._id === id);
     const completed = !todo.completed
     console.log(completed)
     todo.completed = completed;
-    console.log("Rendere Listen...");
+    //console.log("Rendere Listen...");
     renderAllTodos()
 
     try {
@@ -30,7 +30,6 @@ export async function handleTodoClick(id) {
     }
 }
 
-//handleTodoClick('696cf50bb7222e1da92147b6');
 
 const taskInput = document.getElementById('taskInput');
 const addTaskBtn = document.getElementById('addTask')

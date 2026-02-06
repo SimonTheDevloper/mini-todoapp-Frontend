@@ -9,76 +9,84 @@
 </head>
 
 <body class="flex min-h-screen items-center justify-center bg-base-600" data-theme="light">
-        <main class="w-full max-w-md px-4">
+    <main class="w-full max-w-md px-4">
         <div class="mb-8 text-center">
             <h1 class="text-4xl font-bold text-gray-800 mb-2">Welcome</h1>
             <p class="text-gray-600">Manage your tasks efficiently</p>
         </div>
-        
-        <form id="logInForm" 
-            class="bg-base-200 border-2 border-base-300 rounded-box p-6 space-y-4">
+
+        <form id="logInForm" class="bg-base-200 border-2 border-base-300 rounded-box p-6 space-y-4">
             <legend class="text-2xl font-bold text-gray-800 mb-4">Login</legend>
-            
+
             <div>
                 <label class="label">
                     <span class="label-text font-semibold text-gray-700">Email</span>
                 </label>
-                <input type="email" class="input input-bordered w-full bg-base-100" name="email" placeholder="your@email.com" required>
+                <input type="email" class="input input-bordered w-full bg-base-100" name="email"
+                    placeholder="your@email.com" required>
             </div>
-            
+
             <div>
                 <label class="label">
                     <span class="label-text font-semibold text-gray-700">Password</span>
                 </label>
-                <input type="password" class="input input-bordered w-full bg-base-100" name="password" placeholder="••••••••" required>
+                <input type="password" class="input input-bordered w-full bg-base-100" name="password"
+                    placeholder="••••••••" required>
             </div>
-            
+
             <button type="submit" class="btn btn-neutral mt-4 w-full hover:btn-primary transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd" d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    <path fill-rule="evenodd"
+                        d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
+                        clip-rule="evenodd" />
                 </svg>
                 Login
             </button>
-            
+
             <p id="loginMsg" class="mt-2 text-sm text-center"></p>
-            
+
             <p id="switchToSignUp" class="link link-primary mt-4 text-center text-sm cursor-pointer hover:underline">
                 New here? Create an account
             </p>
         </form>
-        
-        <form id="signUpForm" 
-            class="bg-base-200 border-2 border-base-300 rounded-box p-6 space-y-4" style="display: none;">
+
+        <form id="signUpForm" class="bg-base-200 border-2 border-base-300 rounded-box p-6 space-y-4"
+            style="display: none;">
             <legend class="text-2xl font-bold text-gray-800 mb-4">Create Account</legend>
-            
+
             <div>
                 <label class="label">
                     <span class="label-text font-semibold text-gray-700">Username</span>
                 </label>
-                <input type="text" name="username" class="input input-bordered w-full bg-base-100" placeholder="tim" required>
+                <input type="text" name="username" class="input input-bordered w-full bg-base-100" placeholder="tim"
+                    required>
             </div>
-            
+
             <div>
                 <label class="label">
                     <span class="label-text font-semibold text-gray-700">Email</span>
                 </label>
-                <input type="email" name="email" class="input input-bordered w-full bg-base-100" placeholder="your@email.com" required>
+                <input type="email" name="email" class="input input-bordered w-full bg-base-100"
+                    placeholder="your@email.com" required>
             </div>
-            
+
             <div>
                 <label class="label">
                     <span class="label-text font-semibold text-gray-700">Password</span>
                 </label>
-                <input type="password" name="password" class="input input-bordered w-full bg-base-100" placeholder="••••••••" required>
+                <input type="password" name="password" class="input input-bordered w-full bg-base-100"
+                    placeholder="••••••••" required>
             </div>
-            
+
             <button type="submit" class="btn btn-neutral mt-4 w-full hover:btn-primary transition-all duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
+                    <path
+                        d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z" />
                 </svg>
                 Create Account
-            </button><p id="signUpMsg" class="mt-2 text-sm text-center"></p>
-            
+            </button>
+            <p id="signUpMsg" class="mt-2 text-sm text-center"></p>
+
             <p id="switchToLogIn" class="link link-primary mt-4 text-center text-sm cursor-pointer hover:underline">
                 Already have an account? Login
             </p>

@@ -1,6 +1,8 @@
 import { refreshToken } from "../authHelper.js"
+import { apiBase } from "../config.js/api.js";
 
-const url = '/api/todos'
+
+const url = `${apiBase}/todos`
 export let localTodos = [
 ]
 export function updateLocalTodos(newArray) {
@@ -12,7 +14,7 @@ export function getOpenTodos() {
 export function getCompletedTodos() {
     return localTodos.filter(todo => todo.completed === true)
 }
-//console.log(getOpenTodos());
+console.log(getOpenTodos());
 
 export async function fetchAllTodos() {
     try {
