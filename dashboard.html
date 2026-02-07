@@ -13,6 +13,9 @@
         <legend class=" px-10 p-4 fieldset-legend text-2xl font-bold text-center ">Todo App</legend>
     </header>
     <main class="min-h-screen flex items-start justify-center pt-8 px-4">
+        <div id="globalLoader" class="flex justify-center my-4 hidden">
+            <span class="loading loading-spinner loading-lg text-primary"></span>
+        </div>
         <div class="w-full max-w-2xl space-y-6">
             <div class="bg-base-200 border-2 border-base-300 rounded-box  p-6">
                 <label class="label">
@@ -39,21 +42,26 @@
                     <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
                     Open Todos
                 </h2>
-                <div id="openTask" class="flex flex-col gap-2 min-h-[50px]">
+                <div class="min-h-[50px]">
+                    <ul id="openTask" class="flex flex-col gap-2">
+                    </ul>
                     <div id="noOpenTask" class="text-center py-8 text-gray-400">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-50" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                         </svg>
-                        <p class="text-sm">No tasks yet. Add one above!</p>
+                        <p class="text-sm">No open tasks yet. Add one above!</p>
                     </div>
                 </div>
+
                 <h2 class="text-sm font-bold uppercase tracking-wider text-gray-600 mt-6 mb-3 flex items-center gap-2">
                     <div class="w-2 h-2 bg-green-500 rounded-full"></div>
                     Completed
                 </h2>
-                <div id="completedList" class="flex flex-col gap-2 min-h-[50px]">
+                <div class="min-h-[50px]">
+                    <ul id="completedList" class="flex flex-col gap-2">
+                    </ul>
                     <div id="noCompletedTask" class="text-center py-8 text-gray-400 opacity-60">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto mb-2 opacity-50" fill="none"
                             viewBox="0 0 24 24" stroke="currentColor">
@@ -63,6 +71,7 @@
                         <p class="text-sm">Nothing completed yet</p>
                     </div>
                 </div>
+
             </div>
 
         </div>

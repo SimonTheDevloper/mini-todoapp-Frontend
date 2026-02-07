@@ -1,5 +1,5 @@
 import { refreshToken } from "../authHelper.js"
-import { apiBase } from "../config.js/api.js";
+import { apiBase } from "../config/api.js";
 
 
 const url = `${apiBase}/todos`
@@ -14,7 +14,6 @@ export function getOpenTodos() {
 export function getCompletedTodos() {
     return localTodos.filter(todo => todo.completed === true)
 }
-console.log(getOpenTodos());
 
 export async function fetchAllTodos() {
     try {
@@ -22,7 +21,6 @@ export async function fetchAllTodos() {
             method: 'GET',
             credentials: 'include'
         });
-
 
         if (response.status === 401) {
             console.log('accestoken abgelaufen. Veruchen das accestoken zu refreshen...')

@@ -1,4 +1,6 @@
-const url = '/api/user'
+import { apiBase } from "./config/api.js"
+
+const url = `${apiBase}/user`
 export async function refreshToken() {
     try {
         const response = await fetch(`${url}/refresh`, {

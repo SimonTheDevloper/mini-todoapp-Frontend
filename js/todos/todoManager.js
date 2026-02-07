@@ -2,15 +2,28 @@ import { fetchAllTodos, getCompletedTodos, getOpenTodos, localTodos, patchTodo, 
 import { renderTodoList } from "./todoUI.js";
 
 async function init() {
-    await fetchAllTodos();
-    renderAllTodos()
+    const loader = document.getElementById('globalLoader');
+
+    loader.classList.remove('hidden')
+    document.getElementById('noOpenTask').classList.add('hidden');
+    document.getElementById('noCompletedTask').classList.add('hidden')
+
+    try {
+        await fetchAllTodos();
+        renderAllTodos()
+    } catch (error) {
+        console.log('Inizialisierung failed:', error)
+    } finally {
+        loader.classList.add('hidden');
+        updateEmptyStates()
+    }
+
 }
 
 function renderAllTodos() {
     renderTodoList(getOpenTodos(), 'openTask', handleTodoClick);
     renderTodoList(getCompletedTodos(), 'completedList', handleTodoClick);
 }
-
 
 
 export async function handleTodoClick(id) {
@@ -71,4 +84,31 @@ async function addNewTask() {
     }
 
 }
-init();
+export function updateEmptyStates() {
+    const noOpentaskEl = document.getElementById('noOpenTask');
+    const noCompletedEl = document.getElementById('noCompletedTask');
+
+    const hasOpen = localTodos.some(t => t.completed === false);
+    const hasCompleted = localTodos.some(t => t.completed === true);
+    if (!noOpentaskEl || !noCompletedEl) {
+        console.error('Empty state elements nicht gefunden!');
+        return;
+    }
+    if (hasOpen) {
+        noOpentaskEl.classList.add('hidden');
+    } else {
+        noOpentaskEl.classList.remove('hidden');
+    };
+
+    if (hasCompleted) {
+        noCompletedEl.classList.add('hidden');
+    } else {
+        noCompletedEl.classList.remove('hidden');
+    };
+
+}
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}

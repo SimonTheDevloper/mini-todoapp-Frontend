@@ -1,4 +1,4 @@
-import { apiBase } from "../config.js/api.js";
+import { apiBase } from "../config/api.js";
 
 const url = `${apiBase}/user`
 
