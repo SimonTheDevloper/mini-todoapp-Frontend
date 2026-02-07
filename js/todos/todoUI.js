@@ -21,8 +21,15 @@ export function renderTodoList(todos, elementId, clickHandler) {
         const span = document.createElement("span");
         span.textContent = todo.text;
         span.className = "text-gray-700 flex-1";
+
+        const delteBtn = document.createElement('button')
+        delteBtn.textContent = "delete"
+        delteBtn.dataset.id = todo._id;
+        delteBtn.className =
+            "btn btn-sm btn-ghost text-error opacity-50 hover:opacity-100 transition-opacity ml-auto"
+
         label.append(checkbox, span);
-        li.appendChild(label);
+        li.append(label, delteBtn);
         liste.appendChild(li);
     });
 
