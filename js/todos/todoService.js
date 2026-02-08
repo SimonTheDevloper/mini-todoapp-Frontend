@@ -107,3 +107,30 @@ export async function patchTodo(id, completed) {
 
     }
 }
+export async function deleteTodo(id) {
+    try {
+        let response = await fetch(`${url}/${id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+
+        if (response.status === 401) {
+            console.log('Access-Token abgelaufen. Versuche Refresh...');
+            const refreshSuccess = await refreshToken();
+
+            if (refreshSuccess) {
+                response = await fetch(`${url}/${id}`, {
+                    method: 'DELETE',
+                    credentials: 'include'
+                });
+            }
+        }
+        if (!response.ok) {
+            throw new Error(errorData.message || errorData.error || `Fehler beim Löschen: ${response.status}`);
+        }
+        return true;
+    } catch (error) {
+        console.error("Delete Todo Failed:", error);
+        throw error;
+    }
+}

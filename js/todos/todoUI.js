@@ -23,10 +23,13 @@ export function renderTodoList(todos, elementId, clickHandler) {
         span.className = "text-gray-700 flex-1";
 
         const delteBtn = document.createElement('button')
-        delteBtn.textContent = "delete"
         delteBtn.dataset.id = todo._id;
         delteBtn.className =
             "btn btn-sm btn-ghost text-error opacity-50 hover:opacity-100 transition-opacity ml-auto"
+        const trashIcon = document.createElement('i');
+        trashIcon.className = 'fa-solid fa-trash-can'
+        delteBtn.appendChild(trashIcon);
+
 
         label.append(checkbox, span);
         li.append(label, delteBtn);

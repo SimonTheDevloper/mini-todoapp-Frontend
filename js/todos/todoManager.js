@@ -1,4 +1,4 @@
-import { fetchAllTodos, getCompletedTodos, getOpenTodos, localTodos, patchTodo, postTodo, updateLocalTodos } from "./todoService.js";
+import { deleteTodo, fetchAllTodos, getCompletedTodos, getOpenTodos, localTodos, patchTodo, postTodo, updateLocalTodos } from "./todoService.js";
 import { renderTodoList } from "./todoUI.js";
 
 async function init() {
@@ -51,7 +51,8 @@ taskInput.addEventListener('keydown', (event) => {
         addNewTask();
     }
 });
-addTaskBtn.addEventListener('click', () => addNewTask())
+addTaskBtn.addEventListener('click', () => addNewTask());
+
 
 async function addNewTask() {
     const task = taskInput.value.trim();
@@ -84,6 +85,37 @@ async function addNewTask() {
     }
 
 }
+
+const openList = document.getElementById('openTask');
+const completedList = document.getElementById('completedList');
+
+const handleDelteClick = async (event) => {
+    const delteBtn = event.target.closest('.text-error'); // ja das ist eine CSS klasse von dem Button
+
+    if (delteBtn) {
+        const todoId = delteBtn.dataset.id;
+        const liElement = delteBtn.closest('li');
+
+        const updateArray = localTodos.filter(t =>
+            t._id !== todoId)
+        updateLocalTodos(updateArray)
+
+        liElement.remove()
+
+        updateEmptyStates()
+
+        try {
+            const data = await deleteTodo(todoId);
+        } catch (error) {
+            console.log(error);
+            alert("Failed to delte Todo. Try it later again")
+        }
+    }
+}
+
+openList.addEventListener('click', handleDelteClick);
+completedList.addEventListener('click', handleDelteClick);
+
 export function updateEmptyStates() {
     const noOpentaskEl = document.getElementById('noOpenTask');
     const noCompletedEl = document.getElementById('noCompletedTask');
