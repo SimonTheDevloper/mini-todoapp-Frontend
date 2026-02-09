@@ -96,17 +96,18 @@ const handleDelteClick = async (event) => {
         const todoId = delteBtn.dataset.id;
         const liElement = delteBtn.closest('li');
 
-        const updateArray = localTodos.filter(t =>
-            t._id !== todoId)
-        updateLocalTodos(updateArray)
-
         liElement.remove()
-
         updateEmptyStates()
 
         try {
-            const data = await deleteTodo(todoId);
+            const sucsess = await deleteTodo(todoId);
+            if (sucsess) {
+                const updateArray = localTodos.filter(t =>
+                    t._id !== todoId)
+                updateLocalTodos(updateArray)
+            }
         } catch (error) {
+            renderAllTodos();
             console.log(error);
             alert("Failed to delte Todo. Try it later again")
         }
