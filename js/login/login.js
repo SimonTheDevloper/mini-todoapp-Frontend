@@ -61,6 +61,10 @@ async function handleSignUp(e) {
     await createNewUser(newUser);
     updateMsg(signUpMsg, "Successfully created", "green");
     signUpForm.reset();
+
+    setTimeout(() => {
+      window.location.href = "dashboard.html"
+    }, 1000);
   } catch (err) {
     updateMsg(signUpMsg, err.message || "Error", "red");
   }

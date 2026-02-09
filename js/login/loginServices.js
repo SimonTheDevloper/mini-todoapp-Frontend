@@ -18,9 +18,6 @@ export async function createNewUser(newUser) {
         if (!response.ok) {
             throw new Error(data.message || data.error || 'Registration failed')
         }
-        setTimeout(() => {
-            window.location.href = "dashboard.html"
-        }, 1000);
     } catch (err) {
         console.error(err)
         throw new Error(err.message || 'Failed to create user ')

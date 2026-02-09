@@ -6,12 +6,23 @@
       "destination": "https://todoapp--.onrender.com/:path*"
     },
     {
-      "source": "/auth",
-      "destination": "/login.html"
-    },
-    {
-      "source": "/",
-      "destination": "/dashboard.html"
+      "redirects": [
+        {
+          "source": "/auth",
+          "destination": "/login.html"
+        },
+        {
+          "source": "/",
+          "has": [
+            {
+              "type": "cookie",
+              "key": "accessToken"
+            }
+          ],
+          "destination": "/dashboard.html",
+          "permanent": false
+        }
+      ]
     }
   ]
 }
