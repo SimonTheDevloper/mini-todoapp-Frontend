@@ -1,6 +1,6 @@
 {
   "buildCommand": "npm run build",
-  "cleanUrls": "true",
+  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/api/:path*",
