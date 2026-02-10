@@ -10,7 +10,6 @@
 </head>
 
 <body class="bg-base-100 flex flex-col h-screen" data-theme="light">
-
     <header class="navbar bg-gray-100 px-6 border-b border-base-300">
         <div class="flex-1">
             <a href="#"
@@ -27,7 +26,7 @@
             </a>
         </div>
         <div class="flex-none">
-            <a href="login.html" class="btn btn-outline btn-sm hover:btn-neutral transition-all">
+            <a href="auth.html" class="btn btn-outline btn-sm hover:btn-neutral transition-all">
                 Login / Signup
             </a>
         </div>
@@ -45,7 +44,26 @@
 
                     <p class="py-2 text-gray-600 text-lg">
                     </p>
-
+                    <dialog id="serverModal" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box">
+                            <div class="flex items-start space-x-3 mb-4">
+                                <div class="flex-1">
+                                    <h3 class="text-lg font-bold">Loading Time Notice</h3>
+                                </div>
+                            </div>
+                            <p class="py-4 text-red-800">
+                                This website is hostet on free hosting services.
+                                Therefore, it can take up to <strong>1 minute</strong> for the server to respond.
+                                Subsequent requests will be much
+                                faster.
+                            </p>
+                            <div class="modal-action">
+                                <form method="dialog">
+                                    <button class="btn btn-neutral">Got it</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
                     <a href="dashboard.html" class="btn btn-neutral btn-wide btn-lg shadow-lg group">
                         go to the Dashboard
                         <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
@@ -60,6 +78,7 @@
             <p class="text-xs text-gray-500">2026 made by Sim</p>
         </aside>
     </footer>
+    <script src="js/modalHelper.js"></script>
 </body>
 
 </html>
