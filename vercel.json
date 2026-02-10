@@ -7,7 +7,7 @@
     },
     {
       "source": "/auth",
-      "destination": "/login.html"
+      "destination": "login.html"
     }
   ],
   "redirects": [
