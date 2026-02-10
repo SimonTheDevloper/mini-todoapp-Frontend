@@ -4,25 +4,23 @@
     {
       "source": "/api/:path*",
       "destination": "https://todoapp--.onrender.com/:path*"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/auth",
+      "destination": "/login.html"
     },
     {
-      "redirects": [
+      "source": "/",
+      "has": [
         {
-          "source": "/auth",
-          "destination": "/login.html"
-        },
-        {
-          "source": "/",
-          "has": [
-            {
-              "type": "cookie",
-              "key": "accessToken"
-            }
-          ],
-          "destination": "/dashboard.html",
-          "permanent": false
+          "type": "cookie",
+          "key": "accessToken"
         }
-      ]
+      ],
+      "destination": "/dashboard.html",
+      "permanent": false
     }
   ]
 }
