@@ -12,7 +12,7 @@
       "has": [
         {
           "type": "cookie",
-          "key": "accessToken"
+          "key": "refreshToken"
         }
       ],
       "destination": "/dashboard",
@@ -23,7 +23,7 @@
       "missing": [
         {
           "type": "cookie",
-          "key": "accessToken"
+          "key": "refreshToken"
         }
       ],
       "destination": "/auth",
