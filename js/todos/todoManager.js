@@ -85,7 +85,6 @@ async function addNewTask() {
     }
 
 }
-
 const openList = document.getElementById('openTask');
 const completedList = document.getElementById('completedList');
 
@@ -114,8 +113,42 @@ const handleDelteClick = async (event) => {
     }
 }
 
-openList.addEventListener('click', handleDelteClick);
-completedList.addEventListener('click', handleDelteClick);
+let editingTodoId = null;
+
+const handleEditClick = (event) => {
+    const editBtn = event.target.closest('.edit');
+    if (!editBtn) return;
+
+    const todoId = editBtn.dataset.id;
+    const todo = localTodos.find(t => t._id === todoId);
+    console.log(todoId)
+    console.log(todo)
+    if (!todo) return;
+
+    editingTodoId = todoId;
+
+    document.getElementById('editInput').value = todo.text;
+    toggleEditModal(true);
+};
+function toggleEditModal(show) {
+    const modal = document.getElementById('editModal')
+    if (show) {
+        modal.classList.remove('hidden');
+    } else {
+        modal.classList.add('hidden');
+    }
+}
+document.getElementById('cancelEdit').addEventListener('click', () => { toggleEditModal() })
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        toggleEditModal()
+    }
+});
+
+
+
+openList.addEventListener('click', (e) => { handleDelteClick(e), handleEditClick(e) });
+completedList.addEventListener('click', (e) => { handleDelteClick(e), handleEditClick(e) });
 
 export function updateEmptyStates() {
     const noOpentaskEl = document.getElementById('noOpenTask');

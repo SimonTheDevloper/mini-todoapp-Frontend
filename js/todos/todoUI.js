@@ -22,19 +22,25 @@ export function renderTodoList(todos, elementId, clickHandler) {
         span.textContent = todo.text;
         span.className = "text-gray-700 flex-1";
 
-        const delteBtn = document.createElement('button')
+        const editBtn = document.createElement("button");
+        editBtn.dataset.id = todo._id;
+        editBtn.className =
+            "btn btn-sm btn-ghost opacity-50 hover:opacity-100 transition-opacity ml-auto edit";
+        const editIcon = document.createElement("i");
+        editIcon.className = "fa-solid fa-pen-to-square";
+        editBtn.appendChild(editIcon);
+        const delteBtn = document.createElement("button");
         delteBtn.dataset.id = todo._id;
         delteBtn.className =
-            "btn btn-sm btn-ghost text-error opacity-50 hover:opacity-100 transition-opacity ml-auto"
-        const trashIcon = document.createElement('i');
-        trashIcon.className = 'fa-solid fa-trash-can'
+            "btn btn-sm btn-ghost text-error opacity-50 hover:opacity-100 transition-opacity ml-auto";
+        const trashIcon = document.createElement("i");
+        trashIcon.className = "fa-solid fa-trash-can";
         delteBtn.appendChild(trashIcon);
 
-
         label.append(checkbox, span);
-        li.append(label, delteBtn);
+        li.append(label, delteBtn, editBtn);
         liste.appendChild(li);
-    });
 
-    updateEmptyStates();
+        updateEmptyStates();
+    });
 }

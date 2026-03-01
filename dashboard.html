@@ -85,7 +85,18 @@
                         <p class="text-sm">Nothing completed yet</p>
                     </div>
                 </div>
+                <div id="editModal" class=" hidden fixed inset-0 bg-black/40 flex items-center justify-center">
+                    <div class="bg-white p-4 rounded-lg w-80">
+                        <h2 class="font-bold mb-2">Edit todo</h2>
 
+                        <input id="editInput" type="text" class="input input-bordered w-full mb-3" />
+
+                        <div class="flex justify-end gap-2">
+                            <button id="cancelEdit" class="btn btn-ghost">Cancel</button>
+                            <button id="saveEdit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
