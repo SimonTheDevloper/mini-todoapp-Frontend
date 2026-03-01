@@ -7,13 +7,14 @@ export function renderTodoList(todos, elementId, clickHandler) {
     todos.forEach((todo) => {
         const li = document.createElement("li");
         li.dataset.id = todo._id;
-        li.className = "flex items-center p-2 py-2 bg-base-100 rounded-lg border-1 border-gray-100 hover:border-gray-200 cursor-pointer";
+        li.className = "flex items-center p-2 bg-base-100 rounded-lg border border-base-200 hover:border-base-300 cursor-pointer transition-colors";
 
         const label = document.createElement("label");
-        label.className = "flex gap-2";
+        label.className = "flex items-center gap-3 cursor-pointer flex-1";
+
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.className = "checkbox";
+        checkbox.className = "checkbox checkbox-primary";
         checkbox.checked = todo.completed;
         checkbox.addEventListener("change", () => {
             clickHandler(todo._id);
@@ -21,7 +22,7 @@ export function renderTodoList(todos, elementId, clickHandler) {
 
         const span = document.createElement("span");
         span.textContent = todo.text;
-        span.className = "text-gray-700 flex-1";
+        span.className = "text-base-content flex-1";
 
         const editBtn = document.createElement("button");
         editBtn.dataset.id = todo._id;
@@ -38,7 +39,7 @@ export function renderTodoList(todos, elementId, clickHandler) {
         delteBtn.appendChild(trashIcon);
 
         const btnContainer = document.createElement('div');
-        btnContainer.className = "flex gap-1 ml-auto items-center border border-gray-200 rounded-lg bg-gray-50 hover:bg-gray-100";
+        btnContainer.className = "flex gap-1 ml-auto items-center border border-base-300 rounded-lg bg-base-200 hover:bg-base-300 transition-colors";
         btnContainer.append(editBtn, delteBtn);
 
         label.append(checkbox, span);
