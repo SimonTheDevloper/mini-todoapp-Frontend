@@ -38,7 +38,7 @@ export function renderTodoList(todos, elementId, clickHandler) {
         delteBtn.appendChild(trashIcon);
 
         const btnContainer = document.createElement('div');
-        btnContainer.className = "flex gap-2 ml-auto";
+        btnContainer.className = "flex gap-1 ml-auto items-center border border-gray-200 rounded-lg bg-gray-50 hover:bg-gray-100";
         btnContainer.append(editBtn, delteBtn);
 
         label.append(checkbox, span);
