@@ -36,7 +36,7 @@ export async function handleTodoClick(id) {
     renderAllTodos()
 
     try {
-        const synTodo = await patchTodo(id, completed);
+        const synTodo = await patchTodo(id, { completed: completed });
         console.log(synTodo)
     } catch (error) {
         console.log(error)
@@ -113,21 +113,20 @@ const handleDelteClick = async (event) => {
     }
 }
 
-let editingTodoId = null;
+let editingTodo = null;
 
 const handleEditClick = (event) => {
     const editBtn = event.target.closest('.edit');
     if (!editBtn) return;
 
     const todoId = editBtn.dataset.id;
-    const todo = localTodos.find(t => t._id === todoId);
+    editingTodo = localTodos.find(t => t._id === todoId);
     console.log(todoId)
-    console.log(todo)
-    if (!todo) return;
+    console.log(editingTodo)
 
-    editingTodoId = todoId;
 
-    document.getElementById('editInput').value = todo.text;
+
+    document.getElementById('editInput').value = editingTodo.text;
     toggleEditModal(true);
 };
 function toggleEditModal(show) {
@@ -138,13 +137,46 @@ function toggleEditModal(show) {
         modal.classList.add('hidden');
     }
 }
+async function saveEditTodo() {
+    const newTodoText = document.getElementById('editInput').value.trim();
+    const todoId = editingTodo._id;
+    const originalTodo = { ...editingTodo };
+    if (newTodoText === editingTodo.text) {
+        console.log('gleich')
+        return toggleEditModal();
+    }
+    const updatedTodos = localTodos.map(todo =>
+        todo._id === todoId ? { ...todo, text: newTodoText } : todo
+    );
+    updateLocalTodos(updatedTodos);
+    renderAllTodos();
+    toggleEditModal();
+    try {
+        const sucsess = await patchTodo(editingTodo._id, { text: newTodoText });
+        if (sucsess) {
+            const updateArray = localTodos.filter(t =>
+                t._id !== todoId)
+            updateLocalTodos(updateArray)
+        }
+    } catch (error) {
+        console.log(error);
+        const rollbackTodos = localTodos.map(todo =>
+            todo._id === todoId ? originalTodo : todo
+        );
+        updateLocalTodos(rollbackTodos);
+        renderAllTodos();
+        alert("Failed to edit Todo. Try it later again")
+    }
+}
+
+
 document.getElementById('cancelEdit').addEventListener('click', () => { toggleEditModal() })
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         toggleEditModal()
     }
 });
-
+document.getElementById('saveEdit').addEventListener('click', () => saveEditTodo())
 
 
 openList.addEventListener('click', (e) => { handleDelteClick(e), handleEditClick(e) });

@@ -76,13 +76,13 @@ export async function postTodo(newTodo) {
         throw new Error("Create Todo Failed", error)
     }
 }
-export async function patchTodo(id, completed) {
+export async function patchTodo(id, uptdates) {
     try {
         let response = await fetch(`${url}/${id}`, {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'include',
-            body: JSON.stringify({ completed: completed })
+            body: JSON.stringify(uptdates)
         });
 
         if (response.status === 401) {
@@ -93,14 +93,15 @@ export async function patchTodo(id, completed) {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
                     credentials: 'include',
-                    body: JSON.stringify({ completed: completed })
+                    body: JSON.stringify(uptdates)
                 });
             }
         }
+        const data = await response.json()
         if (!response.ok) {
             throw new Error(data.message || data.error || `Fehler: ${response.status}`)
         }
-        const data = await response.json()
+
         return data
     } catch (error) {
         throw new Error("Patch Todo Failed", error);
