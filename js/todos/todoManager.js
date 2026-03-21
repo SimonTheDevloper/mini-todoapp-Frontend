@@ -28,13 +28,13 @@ function renderAllTodos() {
 
 export async function handleTodoClick(id) {
     //console.log("CLICK ERKANNT! ID:", id);
-    const todo = localTodos.find(todo => todo._id === id);
+    const todo = localTodos.find(todo => todo._id.toString() === id.toString());
+    console.log("localTodos ids:", localTodos.map(t => ({ id: t._id, type: typeof t._id })))
+    console.log("id:", id, typeof id)
     const completed = !todo.completed
     console.log(completed)
     todo.completed = completed;
-    //console.log("Rendere Listen...");
     renderAllTodos()
-
     try {
         const synTodo = await patchTodo(id, { completed: completed });
         console.log(synTodo)
@@ -42,7 +42,6 @@ export async function handleTodoClick(id) {
         console.log(error)
     }
 }
-
 
 const taskInput = document.getElementById('taskInput');
 const addTaskBtn = document.getElementById('addTask')
@@ -125,7 +124,6 @@ const handleEditClick = (event) => {
     console.log(editingTodo)
 
 
-
     document.getElementById('editInput').value = editingTodo.text;
     toggleEditModal(true);
 };
@@ -153,11 +151,6 @@ async function saveEditTodo() {
     toggleEditModal();
     try {
         const sucsess = await patchTodo(editingTodo._id, { text: newTodoText });
-        if (sucsess) {
-            const updateArray = localTodos.filter(t =>
-                t._id !== todoId)
-            updateLocalTodos(updateArray)
-        }
     } catch (error) {
         console.log(error);
         const rollbackTodos = localTodos.map(todo =>

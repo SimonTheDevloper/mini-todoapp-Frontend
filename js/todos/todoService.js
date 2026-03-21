@@ -1,7 +1,5 @@
 import { refreshToken } from "../authHelper.js"
 import { apiBase } from "../config/api.js";
-
-
 const url = `${apiBase}/todos`
 export let localTodos = [
 ]
@@ -36,7 +34,8 @@ export async function fetchAllTodos() {
             throw new Error(data.message || data.error || `Fehler: ${response.status}`);
         }
         const data = await response.json() // man muss wait machen, das es sozusagen 'ausspackt'
-
+        localTodos.unshift(...data)
+        console.log("nach fetch, localTodos length:", localTodos.length)
         console.log(data)
         localTodos.unshift(...data)
         console.log(localTodos)
