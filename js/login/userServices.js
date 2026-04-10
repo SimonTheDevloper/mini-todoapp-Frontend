@@ -47,3 +47,25 @@ export async function loginUser(user) {
         throw new Error(err.message || 'Failed to login user')
     }
 }
+export async function handlelogoutUser() {
+    try {
+        const response = await fetch(`${url}/logout`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const data = await response.json();
+        console.log(data)
+        if (!response.ok) {
+            throw new Error(data.message || data.error || "Logout failed")
+        }
+        setTimeout(() => {
+            window.location.href = "/"
+        }, 2222)
+    } catch (err) {
+        console.err('logout user error:', err)
+        throw new Error(err.message || 'Failed to logout user')
+    }
+}

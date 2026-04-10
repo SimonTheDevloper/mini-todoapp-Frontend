@@ -27,18 +27,16 @@
             </a>
         </div>
         <div class="flex-none">
-            <div class="flex items-center gap-2">
-                <span class="text-xs font-medium text-base-content/70 hidden sm:inline">Theme:</span>
-                <select id="themeSwitcher" class="select select-bordered select-sm w-40">
-                    <option value="light"><i class="fa-solid fa-sun"></i>Light</option>
-                    <option value="dark"><i class="fa-solid fa-moon"></i>Dark</option>
-                    <option value="cyberpunk"><i class="fa-solid fa-robot"></i>Cyberpunk</option>
-                    <option value="meadow"><i class="fa-solid fa-seedling"></i>meadow</option>
-                    <option value="silk"><i class="fa-solid fa-disease"></i>silk</option>
-                    <option value="coffee"><i class="fa-solid fa-mug-saucer"></i>coffee</option>
-                    <option value="lavendel"><i class="fa-solid fa-spa"></i>lavendel</option>
-                </select>
-            </div>
+            <!-- Settings Button -->
+            <button id="openSettings" class="btn btn-ghost btn-circle hover:btn-primary transition-all duration-200"
+                title="Settings" aria-label="Open settings">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            </button>
         </div>
     </header>
 
@@ -144,24 +142,115 @@
                 </div>
             </div>
         </div>
+
+        <div id="settingsModal"
+            class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+            role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+
+            <div id="settingsPanel" class="bg-base-100 rounded-2xl shadow-2xl w-full max-w-lg border border-base-300 flex flex-col overflow-hidden
+                       transform transition-all duration-300 scale-95 opacity-0" style="max-height: 90vh;">
+
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between px-6 py-4 border-b border-base-300 bg-base-200 shrink-0">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <h2 id="settingsTitle" class="text-lg font-bold text-base-content">Settings</h2>
+                    </div>
+                    <button id="closeSettings"
+                        class="btn btn-ghost btn-sm btn-circle hover:btn-error hover:text-error-content transition-colors"
+                        aria-label="Close settings">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex border-b border-base-300 bg-base-200 shrink-0" role="tablist">
+                    <button
+                        class="settings-tab tab-btn flex-1 py-3 text-sm font-semibold border-b-2 border-primary text-primary transition-all"
+                        data-tab="appearance" role="tab" aria-selected="true">
+                        <i class="fa-solid fa-palette mr-1.5"></i>Appearance
+                    </button>
+                    <button
+                        class="settings-tab tab-btn flex-1 py-3 text-sm font-medium border-b-2 border-transparent text-base-content/50 hover:text-base-content transition-all"
+                        data-tab="account" role="tab" aria-selected="false">
+                        <i class="fa-solid fa-user mr-1.5"></i>Account
+                    </button>
+                    <button
+                        class="settings-tab tab-btn flex-1 py-3 text-sm font-medium border-b-2 border-transparent text-base-content/50 hover:text-base-content transition-all"
+                        data-tab="data" role="tab" aria-selected="false">
+                        <i class="fa-solid fa-database mr-1.5"></i>Data
+                    </button>
+                </div>
+                <div class="overflow-y-auto flex-1 p-6 space-y-6">
+                    <div id="tab-appearance" class="settings-tab-content space-y-6">
+
+                        <section>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-base-content/50 mb-3">Theme</h3>
+                            <div class="grid grid-cols-2 gap-2" id="themeGrid">
+                            </div>
+                        </section>
+
+                        <!-- Font Size -->
+                        <section>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-base-content/50 mb-3">Font size
+                            </h3>
+                            <div class="flex items-center gap-3">
+                                <span class="text-xs text-base-content/50 w-4">A</span>
+                                <input type="range" min="12" max="20" value="16" step="1" id="fontSizeRange"
+                                    class="range range-primary range-sm flex-1" />
+                                <span class="text-lg font-bold text-base-content/50 w-4">A</span>
+                                <span class="badge badge-outline badge-sm w-14 text-center" id="fontSizeLabel">16
+                                    px</span>
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <div id="tab-account" class="settings-tab-content hidden space-y-6">
+
+
+                        <!-- Danger Zone -->
+                        <section>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-error/60 mb-3">Danger zone</h3>
+                            <div class="space-y-2">
+                                <button id="logoutBtn"
+                                    class="btn btn-outline btn-error btn-sm w-full justify-start gap-2">
+                                    <i class="fa-solid fa-right-from-bracket w-4"></i>
+                                    Log out
+                                </button>
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <div id="tab-data" class="settings-tab-content hidden space-y-6">
+
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="px-6 py-3 border-t border-base-300 bg-base-200 flex items-center justify-between shrink-0">
+                    <button id="closeSettingsFooter" class="btn btn-primary btn-sm">
+                        Done
+                    </button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script type="module" src="js/todos/todoManager.js"></script>
-    <script>
-        const themeSwitcher = document.getElementById('themeSwitcher');
-
-        let savedTheme = localStorage.getItem('theme') || 'light';
-        savedTheme = savedTheme.toLowerCase();
-
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        themeSwitcher.value = savedTheme;
-
-        themeSwitcher.addEventListener('change', (e) => {
-            const newTheme = e.target.value.toLowerCase();
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-    </script>
+    <script type="module" src="js/settings.js"></script>
 </body>
 
 </html>

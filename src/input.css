@@ -179,17 +179,18 @@
   --noise: 0;
 }
 
+
 @plugin "daisyui/theme" {
   name: "lavendel";
   default: false;
-  prefersdark: false;
+  prefersdark: true;
   color-scheme: "dark";
   --color-base-100: oklch(28% 0.141 291.089);
   --color-base-200: oklch(38% 0.189 293.745);
   --color-base-300: oklch(43% 0.232 292.759);
   --color-base-content: oklch(94% 0.029 294.588);
-  --color-primary: oklch(0% 0 0);
-  --color-primary-content: oklch(100% 0 0);
+  --color-primary: oklch(62% 0.214 259.815);
+  --color-primary-content: oklch(93% 0.032 255.585);
   --color-secondary: oklch(82% 0.189 84.429);
   --color-secondary-content: oklch(27% 0.077 45.635);
   --color-accent: oklch(70% 0.01 56.259);
@@ -214,4 +215,14 @@
   --noise: 0;
 }
 
+html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
+.no-transition {
+    transition: none !important;
+}
+
+.fa-solid {
+    transition: color 0.3s ease;
+}

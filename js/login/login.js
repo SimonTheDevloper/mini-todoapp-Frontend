@@ -1,4 +1,4 @@
-import { createNewUser, loginUser } from "./loginServices.js";
+import { createNewUser, loginUser } from "./userServices.js";
 
 
 const signUpForm = document.getElementById("signUpForm");
