@@ -235,7 +235,19 @@
                     </div>
 
                     <div id="tab-data" class="settings-tab-content hidden space-y-6">
-
+                        <h3 class="text-xs font-bold uppercase tracking-widest text-base-content/50 mb-3">Import
+                            &amp; Export</h3>
+                        <div class="space-y-2">
+                            <button id="exportJsonBtn" class="btn btn-outline btn-sm w-full justify-start gap-2">
+                                <i class="fa-solid fa-file-arrow-down w-4"></i>
+                                Export todos as JSON
+                            </button>
+                            <label class="btn btn-outline btn-sm w-full justify-start gap-2 cursor-pointer">
+                                <i class="fa-solid fa-file-arrow-up w-4"></i>
+                                Import todos from JSON
+                                <input type="file" accept=".json" id="importJsonInput" class="hidden" />
+                            </label>
+                        </div>
                     </div>
                 </div>
 

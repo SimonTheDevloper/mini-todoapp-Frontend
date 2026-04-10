@@ -1,4 +1,5 @@
 import { handlelogoutUser } from "./login/userServices.js";
+import { localTodos } from "./todos/todoService.js";
 
 const THEMES = [
     { id: "light", label: "Light", icon: "fa-sun", },
@@ -147,4 +148,15 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
     if (confirm(message)) {
         handlelogoutUser();
     }
+});
+document.getElementById('exportJsonBtn').addEventListener('click', () => {
+    const prettyData = JSON.stringify(localTodos, null, 2) //damit schöne einrückungen entstehen
+    const blob = new Blob([prettyData], { type: "application/json" }); // erstellung einer Virtuellen Datei
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `tickivo-todos-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url) // damit der Speicher wieder freigegeben wird.
 });
