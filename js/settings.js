@@ -1,5 +1,6 @@
 import { handlelogoutUser } from "./login/userServices.js";
-import { localTodos } from "./todos/todoService.js";
+import { fetchAllTodos, localTodos, postTodo } from "./todos/todoService.js";
+import { renderTodoList } from "./todos/todoUI.js";
 
 const THEMES = [
     { id: "light", label: "Light", icon: "fa-sun", },
@@ -149,8 +150,11 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
         handlelogoutUser();
     }
 });
+// export todos
 document.getElementById('exportJsonBtn').addEventListener('click', () => {
-    const prettyData = JSON.stringify(localTodos, null, 2) //damit schöne einrückungen entstehen
+    const openTodos = localTodos.filter(t => t.completed === false)
+    const exportData = openTodos.map(t => ({ text: t.text }))
+    const prettyData = JSON.stringify(exportData, null, 2) //damit schöne einrückungen entstehen
     const blob = new Blob([prettyData], { type: "application/json" }); // erstellung einer Virtuellen Datei
 
     const url = URL.createObjectURL(blob);
@@ -160,3 +164,27 @@ document.getElementById('exportJsonBtn').addEventListener('click', () => {
     a.click();
     URL.revokeObjectURL(url) // damit der Speicher wieder freigegeben wird.
 });
+// import todos
+document.getElementById('importJsonInput').addEventListener('change', (e) => { //change da wenn sich eine file in dem auswahlfeld angeklickt wird verändert sich der wert
+    const file = e.target.files[0]; // nur das 1.
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+        try {
+            const importedData = JSON.parse(event.target.result);
+            for (const item of importedData) {
+                if (item.text && typeof item.text === 'string') {
+                    await postTodo(item.text);
+                }
+            }
+            await fetchAllTodos();
+            alert("import completed");
+            renderTodoList()
+        } catch (err) {
+            console.error("Format fehlerhaft", err);
+        }
+    };
+    reader.readAsText(file);
+
+})
