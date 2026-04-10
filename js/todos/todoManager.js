@@ -17,7 +17,7 @@ async function init() {
     }
 }
 
-function renderAllTodos() {
+export function renderAllTodos() {
     renderTodoList(getOpenTodos(), 'openTask', handleTodoClick);
     renderTodoList(getCompletedTodos(), 'completedList', handleTodoClick);
 }

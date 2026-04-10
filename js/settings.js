@@ -1,7 +1,6 @@
 import { handlelogoutUser } from "./login/userServices.js";
+import { renderAllTodos, updateEmptyStates } from "./todos/todoManager.js";
 import { fetchAllTodos, localTodos, postTodo } from "./todos/todoService.js";
-import { renderTodoList } from "./todos/todoUI.js";
-
 const THEMES = [
     { id: "light", label: "Light", icon: "fa-sun", },
     { id: "dark", label: "Dark", icon: "fa-moon" },
@@ -165,9 +164,12 @@ document.getElementById('exportJsonBtn').addEventListener('click', () => {
     URL.revokeObjectURL(url) // damit der Speicher wieder freigegeben wird.
 });
 // import todos
-document.getElementById('importJsonInput').addEventListener('change', (e) => { //change da wenn sich eine file in dem auswahlfeld angeklickt wird verändert sich der wert
-    const file = e.target.files[0]; // nur das 1.
+document.getElementById('importJsonInput').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
     if (!file) return;
+    const importLoader = document.getElementById('importLoader');
+    importLoader.classList.remove('hidden');
+
 
     const reader = new FileReader();
     reader.onload = async (event) => {
@@ -179,12 +181,16 @@ document.getElementById('importJsonInput').addEventListener('change', (e) => { /
                 }
             }
             await fetchAllTodos();
-            alert("import completed");
-            renderTodoList()
+            renderAllTodos();       // mit Argumenten über die exportierte Funktion
+            updateEmptyStates();
+            closeSettings();
         } catch (err) {
             console.error("Format fehlerhaft", err);
+            alert("Import failed: invalid format.");
+        } finally {
+            importLoader.classList.add('hidden');
+            e.target.value = ""; // Input zurücksetzen, damit dieselbe Datei nochmal importierbar ist
         }
     };
     reader.readAsText(file);
-
-})
+});
