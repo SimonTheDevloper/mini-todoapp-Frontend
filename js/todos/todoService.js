@@ -134,3 +134,36 @@ export async function deleteTodo(id) {
         throw error;
     }
 }
+export async function handleDeleteAllTasks() {
+    try {
+        let response = await fetch(`${url}/deleteAll`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
+
+        if (response.status === 401) {
+            console.log('Access-Token abgelaufen. Versuche Refresh...');
+            const refreshSuccess = await refreshToken();
+            if (refreshSuccess) {
+                response = await fetch(`${url}/deleteAll`, {
+                    method: 'DELETE',
+                    credentials: 'include'
+                });
+            }
+        }
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || data.error || `Fehler: ${response.status}`);
+        }
+        updateLocalTodos([]);
+
+        console.log(data.msg, "Anzahl:", data.count);
+        return data;
+
+    } catch (error) {
+        console.error("Delete All Todos Failed:", error);
+        throw error;
+    }
+}

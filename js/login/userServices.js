@@ -69,3 +69,31 @@ export async function handlelogoutUser() {
         throw new Error(err.message || 'Failed to logout user')
     }
 }
+export async function handleDeleteAccount(password) {
+    try {
+        const response = await fetch(`${url}/deleteAccount`, {
+            method: "DELETE",
+            credentials: 'include',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.message || data.error || "Löschen fehlgeschlagen");
+        }
+
+        console.log("Account gelöscht:", data.message);
+
+        setTimeout(() => {
+            window.location.href = "/";
+        }, 2000);
+
+    } catch (err) {
+        console.error('Delete account error:', err);
+        throw new Error(err.message || 'Fehler beim Löschen des Accounts');
+    }
+}

@@ -256,6 +256,22 @@
                                 <input type="file" accept=".json" id="importJsonInput" class="hidden" />
                             </label>
                         </div>
+                        <!-- Clear Data -->
+                        <section>
+                            <h3 class="text-xs font-bold uppercase tracking-widest text-error/60 mb-3">Clear data</h3>
+                            <div class="space-y-2">
+                                <button id="clearAllTodosBtn"
+                                    class="btn btn-ghost btn-sm w-full justify-start gap-2 text-error hover:bg-error/10">
+                                    <i class="fa-solid fa-trash-can w-4"></i>
+                                    Delete all todos
+                                </button>
+                                <button id="clearSettingsBtn"
+                                    class="btn btn-ghost btn-sm w-full justify-start gap-2 text-warning hover:bg-warning/10">
+                                    <i class="fa-solid fa-rotate-left w-4"></i>
+                                    Reset settings to default
+                                </button>
+                            </div>
+                        </section>
                     </div>
                 </div>
 

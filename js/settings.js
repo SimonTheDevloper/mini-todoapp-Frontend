@@ -1,6 +1,6 @@
 import { handlelogoutUser } from "./login/userServices.js";
 import { renderAllTodos, updateEmptyStates } from "./todos/todoManager.js";
-import { fetchAllTodos, localTodos, postTodo } from "./todos/todoService.js";
+import { fetchAllTodos, localTodos, postTodo, updateLocalTodos } from "./todos/todoService.js";
 const THEMES = [
     { id: "light", label: "Light", icon: "fa-sun", },
     { id: "dark", label: "Dark", icon: "fa-moon" },
@@ -193,4 +193,46 @@ document.getElementById('importJsonInput').addEventListener('change', async (e) 
         }
     };
     reader.readAsText(file);
+});
+
+// Clear Data
+document.getElementById('clearAllTodosBtn').addEventListener('click', () => {
+    const random4Digit = Math.floor(1000 + Math.random() * 9000);
+    if (!confirm('Delete all todos? This cannot be undone.')) return
+
+    const userInput = prompt(`Type this number to continue: ${random4Digit}`)
+    if (userInput === String(random4Digit)) {
+        console.log("Deleting todos");
+        const allTodos = [...localTodos] // ne kopie machen
+        updateLocalTodos();
+        renderAllTodos();
+        updateEmptyStates(); MediaQueryListqwe
+    }
+    else {
+
+    }
+})
+document.getElementById("deleteAccountBtn").addEventListener("click", async () => {
+    if (!confirm("Delete your account and ALL data permanently? This cannot be undone.")) return;
+
+    const userInput = prompt('Type "DELETE" to confirm account deletion:');
+    if (userInput !== "DELETE") {
+        alert("Account deletion cancelled.");
+        return;
+    }
+
+    try {
+        const res = await fetch("/api/user", {
+            method: "DELETE",
+            credentials: "include",
+        });
+        if (!res.ok) throw new Error("Server error");
+
+        // Nach erfolgreichem Löschen ausloggen / zur Login-Seite
+        localStorage.clear();
+        window.location.href = "/login";
+    } catch (err) {
+        console.error("Fehler beim Löschen des Accounts:", err);
+        alert("Could not delete account. Please try again.");
+    }
 });
