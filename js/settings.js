@@ -1,4 +1,4 @@
-import { handlelogoutUser } from "./login/userServices.js";
+import { handleDeleteAccount, handlelogoutUser } from "./login/userServices.js";
 import { renderAllTodos, updateEmptyStates } from "./todos/todoManager.js";
 import { fetchAllTodos, handleDeleteAllTasks, localTodos, postTodo, updateLocalTodos } from "./todos/todoService.js";
 const THEMES = [
@@ -219,22 +219,16 @@ document.getElementById('clearAllTodosBtn').addEventListener('click', async () =
 document.getElementById("deleteAccountBtn").addEventListener("click", async () => {
     if (!confirm("Delete your account and ALL data permanently? This cannot be undone.")) return;
 
-    const userInput = prompt('Type "DELETE" to confirm account deletion:');
-    if (userInput !== "DELETE") {
-        alert("Account deletion cancelled.");
+    const password = prompt("Enter your password to continue")
+    if (!password) {
+        alert("Nothing entered. Enter your password to continue");
         return;
     }
 
     try {
-        const res = await fetch("/api/user", {
-            method: "DELETE",
-            credentials: "include",
-        });
-        if (!res.ok) throw new Error("Server error");
-
-        // Nach erfolgreichem Löschen ausloggen / zur Login-Seite
+        await handleDeleteAccount(password);
         localStorage.clear();
-        window.location.href = "/login";
+        window.location.href = "/";
     } catch (err) {
         console.error("Fehler beim Löschen des Accounts:", err);
         alert("Could not delete account. Please try again.");
