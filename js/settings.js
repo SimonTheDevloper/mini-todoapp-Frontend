@@ -1,6 +1,6 @@
 import { handlelogoutUser } from "./login/userServices.js";
 import { renderAllTodos, updateEmptyStates } from "./todos/todoManager.js";
-import { fetchAllTodos, localTodos, postTodo, updateLocalTodos } from "./todos/todoService.js";
+import { fetchAllTodos, handleDeleteAllTasks, localTodos, postTodo, updateLocalTodos } from "./todos/todoService.js";
 const THEMES = [
     { id: "light", label: "Light", icon: "fa-sun", },
     { id: "dark", label: "Dark", icon: "fa-moon" },
@@ -196,20 +196,24 @@ document.getElementById('importJsonInput').addEventListener('change', async (e) 
 });
 
 // Clear Data
-document.getElementById('clearAllTodosBtn').addEventListener('click', () => {
+document.getElementById('clearAllTodosBtn').addEventListener('click', async () => {
     const random4Digit = Math.floor(1000 + Math.random() * 9000);
     if (!confirm('Delete all todos? This cannot be undone.')) return
 
     const userInput = prompt(`Type this number to continue: ${random4Digit}`)
     if (userInput === String(random4Digit)) {
         console.log("Deleting todos");
-        const allTodos = [...localTodos] // ne kopie machen
-        updateLocalTodos();
-        renderAllTodos();
-        updateEmptyStates(); MediaQueryListqwe
+        try {
+            await handleDeleteAllTasks();
+            renderAllTodos();
+            updateEmptyStates();
+        } catch (error) {
+            console.error("Deletion failed:", error.message);
+        }
+
     }
     else {
-
+        alert("Incorrect number entered. Operation canceled.")
     }
 })
 document.getElementById("deleteAccountBtn").addEventListener("click", async () => {

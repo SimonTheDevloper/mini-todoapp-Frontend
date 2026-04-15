@@ -1,5 +1,6 @@
 import { refreshToken } from "../authHelper.js"
 import { apiBase } from "../config/api.js";
+import { renderAllTodos } from "./todoManager.js";
 const url = `${apiBase}/todos`
 export let localTodos = [
 ]
@@ -135,35 +136,46 @@ export async function deleteTodo(id) {
     }
 }
 export async function handleDeleteAllTasks() {
+    const previousTodos = [...localTodos];
+
     try {
-        let response = await fetch(`${url}/deleteAll`, {
+        updateLocalTodos([]);
+        renderAllTodos();
+
+        const fetchOptions = {
             method: 'DELETE',
-            credentials: 'include'
-        });
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+        };
+
+        let response = await fetch(`${url}/deleteAll`, fetchOptions);
 
         if (response.status === 401) {
             console.log('Access-Token abgelaufen. Versuche Refresh...');
             const refreshSuccess = await refreshToken();
             if (refreshSuccess) {
-                response = await fetch(`${url}/deleteAll`, {
-                    method: 'DELETE',
-                    credentials: 'include'
-                });
+                response = await fetch(`${url}/deleteAll`, fetchOptions);
             }
         }
 
         const data = await response.json();
 
+        //Rollback Auslösen
         if (!response.ok) {
-            throw new Error(data.message || data.error || `Fehler: ${response.status}`);
+            throw new Error(data.error || data.message || `Fehler: ${response.status}`);
         }
-        updateLocalTodos([]);
 
-        console.log(data.msg, "Anzahl:", data.count);
+        console.log("Sucsess:", data.message);
         return data;
 
     } catch (error) {
-        console.error("Delete All Todos Failed:", error);
+        // ROLLBACK: alles wiederherrstellen 
+        console.error("Delete All Failed: Rollback ist auch aktiv:", error);
+
+        updateLocalTodos(previousTodos); // Alte Daten zurückschreiben
+        renderAllTodos();
+
+        alert(`Deletion failed: ${error.message}`);
         throw error;
     }
 }
