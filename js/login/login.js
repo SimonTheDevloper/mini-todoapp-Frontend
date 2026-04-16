@@ -10,6 +10,27 @@ const signUpMsg = document.getElementById("signUpMsg");
 const switchToSignUp = document.getElementById("switchToSignUp");
 const switchToLogIn = document.getElementById("switchToLogIn");
 
+function setupPasswordValidation(formEl) {
+  const passwordInput = formEl.querySelector('input[name="password"]');
+  const submitBtn = formEl.querySelector('button[type="submit"]');
+
+  const hint = document.createElement("p");
+  hint.className = "text-xs mt-1 text-error hidden";
+  hint.textContent = "The password must be at least 6 characters long.";
+  passwordInput.insertAdjacentElement("afterend", hint); //Fügt das Element direkt nach dem Passwort-Input ins DOM ein mit afterend sagt man wo
+
+  submitBtn.disabled = true;
+  submitBtn.classList.add("btn-disabled");
+
+  passwordInput.addEventListener("input", () => {
+    const valid = passwordInput.value.length >= 6;
+    submitBtn.disabled = !valid;
+    submitBtn.classList.toggle("btn-disabled", !valid);
+    hint.classList.toggle("hidden", valid);
+  });
+}
+setupPasswordValidation(signUpForm);
+setupPasswordValidation(logInForm);
 switchToSignUp.addEventListener("click", () => {
   logInForm.style.display = "none";
   signUpForm.style.display = "block";
@@ -41,6 +62,8 @@ async function handleLogin(e) {
   console.log(user);
 
   logInForm.reset();
+  logInForm.querySelector('button[type="submit"]').disabled = true;
+  logInForm.querySelector('button[type="submit"]').classList.add("btn-disabled");
 }
 
 signUpForm.addEventListener("submit", handleSignUp);
@@ -62,6 +85,8 @@ async function handleSignUp(e) {
     updateMsg(signUpMsg, "Successfully created", "green");
     signUpForm.reset();
 
+    logInForm.querySelector('button[type="submit"]').disabled = true;
+    logInForm.querySelector('button[type="submit"]').classList.add("btn-disabled");
     setTimeout(() => {
       window.location.href = "dashboard.html"
     }, 1000);
