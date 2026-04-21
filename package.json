@@ -3,7 +3,6 @@
     "@tailwindcss/cli": "^4.1.18",
     "flowbite": "^4.0.1",
     "nodemon": "^3.1.11",
-    "tailwindcss": "^4.1.18",
     "zxcvbn": "^4.4.2"
   },
   "name": "todo-app-frontend",
@@ -28,6 +27,7 @@
   },
   "homepage": "https://github.com/SimonTheDevloper/mini-todoapp-Frontend#readme",
   "devDependencies": {
-    "daisyui": "^5.5.14"
+    "daisyui": "^5.5.14",
+    "tailwindcss": "^4.2.4"
   }
 }

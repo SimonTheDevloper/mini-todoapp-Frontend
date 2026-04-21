@@ -12,21 +12,43 @@ function setupPasswordValidation(formEl) {
   const passwordInput = formEl.querySelector('input[name="password"]');
   const submitBtn = formEl.querySelector('button[type="submit"]');
 
-  console.log(getFeedbackToPasswort(passwordInput));
+  const wrapper = passwordInput.closest(".relative") || passwordInput.parentElement;
 
   const hint = document.createElement("p");
   hint.className = "text-xs mt-1 text-error hidden";
-  hint.textContent = "Password must be at least 6 characters.";
-  passwordInput.closest(".relative").insertAdjacentElement("afterend", hint);
+  wrapper.insertAdjacentElement("afterend", hint);
 
-  passwordInput.addEventListener("input", () => {
-    const valid = passwordInput.value.length >= 6;
+  const feedbackText = document.createElement("p");
+  feedbackText.className = "text-xs mt-1 hidden";
+  wrapper.insertAdjacentElement("afterend", feedbackText);
+
+  function validatePassword() {
+    const value = passwordInput.value.trim();
+    const minLengthOk = value.length >= 3;
+
+    const { score, text } = getFeedbackToPasswort(value);
+
+    const strongEnough = score >= 2; // also als besser oder ok
+
+    const valid = minLengthOk && strongEnough;
+
     submitBtn.disabled = !valid;
     submitBtn.classList.toggle("btn-disabled", !valid);
-    hint.classList.toggle("hidden", valid);
-  });
-}
 
+    if (!minLengthOk) {
+      hint.textContent = "The password must be at least 3 characters long.";
+      hint.classList.remove("hidden");
+    } else {
+      hint.classList.add("hidden");
+    }
+    feedbackText.classList.remove("hidden");
+    feedbackText.textContent = `strength: ${text}`;
+    feedbackText.className = `text-xs mt-1 ${strongEnough ? "text-success" : "text-error"}`;
+  }
+
+  passwordInput.addEventListener("input", validatePassword);
+  validatePassword();
+}
 function switchForms(hideEl, showEl) {
   hideEl.classList.add("hidden");
   showEl.classList.remove("hidden");
@@ -48,9 +70,14 @@ function setupPasswordToggle(formEl) {
   const eyeOpen = btn.querySelector(".eye-open");
   const eyeClosed = btn.querySelector(".eye-closed");
 
-  btn.addEventListener("click", () => {
+  btn.type = "button";
+
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+
     const isHidden = input.type === "password";
     input.type = isHidden ? "text" : "password";
+
     eyeOpen.classList.toggle("hidden", isHidden);
     eyeClosed.classList.toggle("hidden", !isHidden);
   });

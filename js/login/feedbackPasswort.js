@@ -1,16 +1,18 @@
 export function getFeedbackToPasswort(password) {
-    const result = zxcvbn(password);
-    console.log(result)
+    const result = zxcvbn(password || "");
     const score = result.score;
 
     const stärkeÜbersicht = [
         { text: "very weak" },
         { text: "weak" },
         { text: "okay" },
-        { text: "stong" },
+        { text: "strong" },
         { text: "very strong" }
-    ]
-    const stärke = stärkeÜbersicht[score]
+    ];
 
-    return stärke
+    return {
+        score,
+        text: stärkeÜbersicht[score].text,
+        feedback: result.feedback
+    };
 }
