@@ -1,3 +1,4 @@
+import { getFeedbackToPasswort } from "./feedbackPasswort.js";
 import { createNewUser, loginUser } from "./userServices.js";
 
 const signUpForm = document.getElementById("signUpForm");
@@ -10,6 +11,8 @@ const switchToLogIn = document.getElementById("switchToLogIn");
 function setupPasswordValidation(formEl) {
   const passwordInput = formEl.querySelector('input[name="password"]');
   const submitBtn = formEl.querySelector('button[type="submit"]');
+
+  console.log(getFeedbackToPasswort(passwordInput));
 
   const hint = document.createElement("p");
   hint.className = "text-xs mt-1 text-error hidden";

@@ -3,14 +3,15 @@
     "@tailwindcss/cli": "^4.1.18",
     "flowbite": "^4.0.1",
     "nodemon": "^3.1.11",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "zxcvbn": "^4.4.2"
   },
   "name": "todo-app-frontend",
   "version": "1.0.0",
   "description": "",
   "main": "script.js",
   "scripts": {
-    "build" : "npx tailwindcss -i ./src/input.css -o ./dist/output.css",
+    "build": "npx tailwindcss -i ./src/input.css -o ./dist/output.css",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon script.js"
   },
