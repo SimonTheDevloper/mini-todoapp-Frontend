@@ -115,22 +115,21 @@ const handleDeleteClick = async (event) => {
     if (deleteBtn) {
         const todoId = deleteBtn.dataset.id;
         const liElement = deleteBtn.closest('li');
-        liElement.remove()
-        updateEmptyStates()
+        liElement.remove();
+        updateEmptyStates();
         try {
             const success = await deleteTodo(todoId);
             if (success) {
-                const updateArray = localTodos.filter(t => t._id !== todoId)
-                updateLocalTodos(updateArray)
+                const updateArray = localTodos.filter(t => t._id.toString() !== todoId.toString());
+                updateLocalTodos(updateArray);
             }
         } catch (error) {
             renderAllTodos();
             console.log(error);
-            alert("Failed to delete Todo. Try it later again")
+            alert("Failed to delete Todo. Try it later again");
         }
     }
-}
-
+};
 let editingTodo = null;
 
 const editCharCountEl = document.getElementById('editCharCount');
