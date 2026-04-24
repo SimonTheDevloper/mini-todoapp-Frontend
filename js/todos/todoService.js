@@ -36,11 +36,7 @@ export async function fetchAllTodos() {
         }
         const data = await response.json() // man muss wait machen, das es sozusagen 'ausspackt'
         localTodos.unshift(...data)
-        console.log("nach fetch, localTodos length:", localTodos.length)
-        console.log(data)
-        localTodos.unshift(...data)
         console.log(localTodos)
-        //return data
     } catch (error) {
         throw new Error(error.message || 'Fehler in FetchTodos'); // immer mit || da es irgendwie sein kann das ich error msg vergessen hat aber man trotzdem einen error bekommt
     }
