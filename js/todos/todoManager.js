@@ -1,6 +1,7 @@
 import { deleteTodo, fetchAllTodos, getCompletedTodos, getOpenTodos, localTodos, patchTodo, postTodo, updateLocalTodos } from "./todoService.js";
 import { renderTodoList } from "./todoUI.js";
 
+
 async function init() {
     const loader = document.getElementById('globalLoader');
     loader.classList.remove('hidden')
@@ -130,22 +131,41 @@ const handleDeleteClick = async (event) => {
     }
 }
 
-//  Edit 
 let editingTodo = null;
+
+const editCharCountEl = document.getElementById('editCharCount');
+const editInputEl = document.getElementById('editInput');
+
+function updateEditCharCount(len) {
+    editCharCountEl.textContent = `${len} / 100`;
+    if (len >= 100) {
+        editCharCountEl.classList.add('text-error');
+        editCharCountEl.classList.remove('text-warning', 'text-base-content/40');
+    } else if (len >= 80) {
+        editCharCountEl.classList.add('text-warning');
+        editCharCountEl.classList.remove('text-error', 'text-base-content/40');
+    } else {
+        editCharCountEl.classList.add('text-base-content/40');
+        editCharCountEl.classList.remove('text-warning', 'text-error');
+    }
+}
+
+editInputEl.addEventListener('input', () => {
+    updateEditCharCount(editInputEl.value.length);
+});
 
 const handleEditClick = (event) => {
     const editBtn = event.target.closest('.edit');
     if (!editBtn) return;
     const todoId = editBtn.dataset.id;
-    editingTodo = localTodos.find(t => t._id === todoId);
-    console.log(todoId)
-    console.log(editingTodo)
+    editingTodo = localTodos.find(t => t._id.toString() === todoId.toString());
     document.getElementById('editInput').value = editingTodo.text;
+    updateEditCharCount(editingTodo.text.length);
     toggleEditModal(true);
 };
 
 function toggleEditModal(show) {
-    const modal = document.getElementById('editModal')
+    const modal = document.getElementById('editModal');
     if (show) {
         modal.classList.remove('hidden');
     } else {
@@ -159,27 +179,26 @@ async function saveEditTodo() {
     const originalTodo = { ...editingTodo };
 
     if (newTodoText === editingTodo.text) {
-        console.log('gleich')
         return toggleEditModal();
     }
 
     const updatedTodos = localTodos.map(todo =>
-        todo._id === todoId ? { ...todo, text: newTodoText } : todo
+        todo._id.toString() === todoId.toString() ? { ...todo, text: newTodoText } : todo
     );
     updateLocalTodos(updatedTodos);
     renderAllTodos();
     toggleEditModal();
 
     try {
-        const success = await patchTodo(editingTodo._id, { text: newTodoText });
+        await patchTodo(todoId, { text: newTodoText });
     } catch (error) {
         console.log(error);
         const rollbackTodos = localTodos.map(todo =>
-            todo._id === todoId ? originalTodo : todo
+            todo._id.toString() === todoId.toString() ? originalTodo : todo
         );
         updateLocalTodos(rollbackTodos);
         renderAllTodos();
-        alert("Failed to edit Todo. Try it later again")
+        alert("Failed to edit Todo. Try it later again");
     }
 }
 

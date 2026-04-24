@@ -137,7 +137,6 @@ function resetBtn(formEl) {
 }
 
 // Initialisierung
-setupPasswordValidation(logInForm);
 setupPasswordValidation(signUpForm);
 setupPasswordToggle(logInForm);
 setupPasswordToggle(signUpForm);
