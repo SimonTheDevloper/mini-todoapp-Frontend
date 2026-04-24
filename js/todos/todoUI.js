@@ -10,7 +10,7 @@ export function renderTodoList(todos, elementId, clickHandler) {
         li.className = "flex items-center p-2 bg-base-100 rounded-lg border border-base-200 hover:border-base-300 cursor-pointer transition-colors";
 
         const label = document.createElement("label");
-        label.className = "flex items-center gap-3 cursor-pointer flex-1";
+        label.className = "flex items-center gap-3 cursor-pointer flex-1 min-w-0";
 
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
@@ -22,7 +22,7 @@ export function renderTodoList(todos, elementId, clickHandler) {
 
         const span = document.createElement("span");
         span.textContent = todo.text;
-        span.className = "text-base-content flex-1";
+        span.className = "text-base-content flex-1 min-w-0 break-words";
 
         const editBtn = document.createElement("button");
         editBtn.dataset.id = todo._id;
@@ -39,7 +39,7 @@ export function renderTodoList(todos, elementId, clickHandler) {
         delteBtn.appendChild(trashIcon);
 
         const btnContainer = document.createElement('div');
-        btnContainer.className = "flex gap-1 ml-auto items-center border border-base-300 rounded-lg bg-base-200 hover:bg-base-300 transition-colors";
+        btnContainer.className = "flex gap-1 ml-auto items-start border border-base-300 rounded-lg bg-base-200 hover:bg-base-300 transition-colors shrink-0";
         btnContainer.append(editBtn, delteBtn);
 
         label.append(checkbox, span);
